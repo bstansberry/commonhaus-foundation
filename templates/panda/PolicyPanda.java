@@ -257,6 +257,12 @@ public class PolicyPanda extends CommonhausPanda implements Runnable {
                             "Branch %s is not protected".formatted(branch.getName())));
 
                     if (branch.isProtected()) {
+	                    addCheck(repo, new Check(branch.isProtected() && branch.getProtectionUrl() != null, Kind.BONUS,
+	                            "Branch %s protection details are available".formatted(branch.getName()),
+	                            "Branch %s protection details are not available".formatted(branch.getName())));
+                    }
+
+                    if (branch.isProtected() && branch.getProtectionUrl() != null) {
                         boolean allowForcePushes = true;
                         boolean allowDeletions = true;
                         boolean enforceAdmins = false;
